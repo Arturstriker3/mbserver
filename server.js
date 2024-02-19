@@ -17,6 +17,7 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
+const port = process.env.PORT || 3000; // Define a porta como a variável de ambiente PORT ou 3000
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -151,6 +152,6 @@ reset.deleteMessages();
 // Documentação
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-server.listen(3000, () => {
-  console.log(`Chat server is running on 3000`);
+server.listen(port, () => { // Altera a chamada do método listen para usar a porta definida acima
+  console.log(`Chat server is running on ${port}`);
 });
