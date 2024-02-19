@@ -1,0 +1,25 @@
+{
+  "name": "mbserver",
+  "version": "1.0.0",
+  "description": "Server for Messenger Buddy",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "reset": "node scripts/reset.js",
+    "swagger": "node ./swagger.js"
+  },
+  "author": "Artur Daniel",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "mysql2": "^3.9.1",
+    "socket.io": "^4.7.4",
+    "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.23.7"
+  }
+}

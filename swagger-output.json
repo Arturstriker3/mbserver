@@ -1,0 +1,128 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Messenger Buddy API",
+    "description": "Rotas para o aplicativo de mensagens.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/doc",
+  "schemes": [
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "Mensagens",
+      "description": "Operações relacionadas a mensagens"
+    },
+    {
+      "name": "Autenticação",
+      "description": "Operações relacionadas à autenticação de usuários"
+    }
+  ],
+  "paths": {
+    "/getMessages": {
+      "get": {
+        "tags": [
+          "Mensagens"
+        ],
+        "description": "Rota para obter mensagens do servidor.",
+        "responses": {
+          "200": {
+            "description": "OK - Retorna as mensagens com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string",
+                    "description": "O usuário que enviou a mensagem."
+                  },
+                  "text": {
+                    "type": "string",
+                    "description": "O conteúdo da mensagem."
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "A data da mensagem."
+                  },
+                  "time": {
+                    "type": "string",
+                    "description": "O horário da mensagem."
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error - Ocorreu um erro no servidor."
+          }
+        }
+      }
+    },
+    "/sendMessage": {
+      "post": {
+        "tags": [
+          "Mensagens"
+        ],
+        "description": "Rota para enviar uma mensagem para o servidor.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "message",
+            "description": "Objeto contendo os dados da mensagem a ser enviada.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string",
+                  "description": "O usuário que está enviando a mensagem."
+                },
+                "text": {
+                  "type": "string",
+                  "description": "O conteúdo da mensagem."
+                },
+                "date": {
+                  "type": "string",
+                  "description": "A data da mensagem."
+                },
+                "time": {
+                  "type": "string",
+                  "description": "O horário da mensagem."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - A mensagem foi entregue com sucesso."
+          }
+        }
+      }
+    },
+    "/api/checkUserOnline/{username}": {
+      "get": {
+        "tags": [
+          "Autenticação"
+        ],
+        "description": "Rota para verificar disponibilidade de nome de usuário.",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - nome pode ser usado."
+          }
+        }
+      }
+    }
+  }
+}
