@@ -29,7 +29,7 @@ const io = new Server(server, {
 let connectedUsers = [];
 
 io.on('connection', (socket) => {
-  console.log(`user ${socket.id} is connected`);
+  // console.log(`user ${socket.id} is connected`);
 
   // Quando um usuário se conecta, espera-se que o front-end envie o nome de usuário
   socket.on('currentUser', (username) => {
@@ -44,11 +44,11 @@ io.on('connection', (socket) => {
 
     // Atualizar contagem de usuários online
     const onlineUsersCount = io.engine.clientsCount;
-    console.log('Online users count:', onlineUsersCount); // Adicione este log
+    // console.log('Online users count:', onlineUsersCount);
     io.emit('onlineUsersCount', onlineUsersCount);
 
     // Exibir os usuários conectados no console
-    console.log('Connected users:', connectedUsers);
+    // console.log('Connected users:', connectedUsers);
   });
 
   // Escutar por mensagens enviadas pelo cliente
@@ -59,7 +59,7 @@ io.on('connection', (socket) => {
 
   // Lidar com desconexão do usuário
   socket.on('disconnect', () => {
-    console.log(`user ${socket.id} left`);
+    // console.log(`user ${socket.id} left`);
 
     // Se o usuário estava associado a um nome de usuário, emitir evento informando sua saída
     if (socket.currentUser) {
@@ -69,12 +69,12 @@ io.on('connection', (socket) => {
       connectedUsers = connectedUsers.filter(user => user !== socket.currentUser);
 
       // Exibir os usuários conectados atualizados no console
-      console.log('Connected users:', connectedUsers);
+      // console.log('Connected users:', connectedUsers);
     }
 
     // Atualizar contagem de usuários online
     const onlineUsersCount = io.engine.clientsCount;
-    console.log('Online users count:', onlineUsersCount); // Adicione este log
+    // console.log('Online users count:', onlineUsersCount);
     io.emit('onlineUsersCount', onlineUsersCount);
   });
 });
