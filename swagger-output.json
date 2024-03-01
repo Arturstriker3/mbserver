@@ -21,7 +21,7 @@
     }
   ],
   "paths": {
-    "/getMessages": {
+    "/api/getMessages": {
       "get": {
         "tags": [
           "Mensagens"
@@ -61,7 +61,7 @@
         }
       }
     },
-    "/sendMessage": {
+    "/api/sendMessage": {
       "post": {
         "tags": [
           "Mensagens"

@@ -4,7 +4,7 @@ const router = express.Router();
 const messagesController = require('../controllers/messagesController');
 
 // Rota para obter mensagens
-router.get('/getMessages', (req, res) => {
+router.get('/api/getMessages', (req, res) => {
   messagesController.getMessages((err, results) => {
     if (err) {
       res.status(500).json({ error: 'Erro ao recuperar mensagens antigas' });
@@ -15,7 +15,7 @@ router.get('/getMessages', (req, res) => {
 });
 
 //  Rota para inserção mensagens
-router.post('/sendMessage', (req, res) => {
+router.post('/api/sendMessage', (req, res) => {
   const data = req.body;
   // console.log('Dados recebidos na rota sendMessage:', data);
 

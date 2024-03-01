@@ -8,6 +8,7 @@ const mysql = require('mysql2');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const messagesRoutes = require('./routes/messagesRoutes');
+const authenticationRoutes = require('./routes/authenticationRoutes');
 const reset = require('./scripts/reset');
 const swaggerAutogen = require('swagger-autogen')();
 const swaggerUi = require('swagger-ui-express');
@@ -81,21 +82,20 @@ io.on('connection', (socket) => {
 
 // Middleware para lidar com as solicitações OPTIONS
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  const allowedOrigins = [
+    'https://messenger-buddy.vercel.app',
+    'https://messenger-buddy-arturstriker3.vercel.app',
+    'https://messenger-buddy-git-master-arturstriker3.vercel.app'
+  ];
+
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
-});
-
-// Rota para verificar se um usuário está online
-app.get('/api/checkUserOnline/:username', (req, res) => {
-  const username = req.params.username;
-
-  // Verificar se o nome de usuário está na lista de usuários conectados
-  const isOnline = connectedUsers.includes(username);
-
-  // Responder com o status do usuário
-  res.status(200).json({ online: isOnline });
 });
 
 // Objeto io para ser acessado em outros lugares
@@ -133,12 +133,13 @@ db.connect((err) => {
   if (err) {
     handleDatabaseConnectionError(err);
   } else {
-    console.log('Connected to database');
+    console.log('Conectado ao Banco de Dados!');
   }
 });
 
-// Rotas mensagens 
-app.use('/api/', messagesRoutes);
+// Rotas 
+app.use('/', messagesRoutes);
+app.use('/', authenticationRoutes(io));
 
 // Exporta a instância do aplicativo
 module.exports = { app, io };
@@ -147,11 +148,11 @@ module.exports = { app, io };
 app.use(cors());
 
 // Rotina para apagar mensagens
-reset.deleteMessages();
+// reset.deleteMessages();
 
 // Documentação
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-server.listen(port, () => { // Altera a chamada do método listen para usar a porta definida acima
-  console.log(`Chat server is running on ${port}`);
+server.listen(port, () => {
+  console.log(`Server rodando na porta: ${port}`);
 });
