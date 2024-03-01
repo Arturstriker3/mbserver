@@ -3,9 +3,10 @@ const express = require('express');
 const router = express.Router();
 // const authenticationController = require('../controllers/authenticationController');
 
+// Armazenar os nomes de usuário conectados
+let authConnectedUsers = [];
+
 module.exports = (io) => {
-  // Armazenar os nomes de usuário conectados
-  let authConnectedUsers = [];
 
   // Ouvir o evento 'userConnected' emitido pelo Socket.IO
   io.on('userConnected', (username) => {
