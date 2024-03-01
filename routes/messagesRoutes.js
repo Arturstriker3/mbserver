@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const messagesController = require('../controllers/messagesController');
-const cors = require('cors'); // Importe o módulo CORS aqui
+const cors = require('cors');
 
 router.use(cors());
 
