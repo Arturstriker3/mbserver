@@ -80,17 +80,6 @@ io.on('connection', (socket) => {
   });
 });
 
-// Rota para verificar se um usuário está online
-app.get('/api/checkUserOnline/:username', (req, res) => {
-  const username = req.params.username;
-
-  // Verificar se o nome de usuário está na lista de usuários conectados
-  const isOnline = connectedUsers.includes(username);
-
-  // Responder com o status do usuário
-  res.status(200).json({ online: isOnline });
-});
-
 // Middleware para lidar com as solicitações OPTIONS
 app.use((req, res, next) => {
   const allowedOrigins = [
@@ -109,6 +98,17 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
+});
+
+// Rota para verificar se um usuário está online
+app.get('/api/checkUserOnline/:username', (req, res) => {
+  const username = req.params.username;
+
+  // Verificar se o nome de usuário está na lista de usuários conectados
+  const isOnline = connectedUsers.includes(username);
+
+  // Responder com o status do usuário
+  res.status(200).json({ online: isOnline });
 });
 
 // Objeto io para ser acessado em outros lugares
