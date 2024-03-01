@@ -8,7 +8,7 @@ const mysql = require('mysql2');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const messagesRoutes = require('./routes/messagesRoutes');
-const authenticationRoutes = require('./routes/authenticationRoutes');
+// const authenticationRoutes = require('./routes/authenticationRoutes');
 const reset = require('./scripts/reset');
 const swaggerAutogen = require('swagger-autogen')();
 const swaggerUi = require('swagger-ui-express');
@@ -152,7 +152,7 @@ db.connect((err) => {
 
 // Rotas 
 app.use('/', messagesRoutes);
-app.use('/', authenticationRoutes(io));
+// app.use('/', authenticationRoutes);
 
 // Exporta a instância do aplicativo
 module.exports = { app, io };
