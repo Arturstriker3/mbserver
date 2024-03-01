@@ -1,7 +1,10 @@
-// routes/messagesRoutes.js
+// messagesRoutes.js
 const express = require('express');
 const router = express.Router();
 const messagesController = require('../controllers/messagesController');
+const cors = require('cors'); // Importe o módulo CORS aqui
+
+router.use(cors());
 
 // Rota para obter mensagens
 router.get('/api/getMessages', (req, res) => {
