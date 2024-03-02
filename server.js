@@ -81,23 +81,29 @@ io.on('connection', (socket) => {
 });
 
 // Middleware para lidar com as solicitações OPTIONS
-app.use((req, res, next) => {
-  const allowedOrigins = [
-    'https://messenger-buddy.vercel.app',
-    'https://messenger-buddy-arturstriker3.vercel.app',
-    'https://messenger-buddy-git-master-arturstriker3.vercel.app',
-    'http://localhost:5173/'
-  ];
+// app.use((req, res, next) => {
+//   const allowedOrigins = [
+//     'https://messenger-buddy.vercel.app',
+//     'https://messenger-buddy-arturstriker3.vercel.app',
+//     'https://messenger-buddy-git-master-arturstriker3.vercel.app'
+//   ];
 
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-  } else {
-    res.status(403).json({ error: 'Not allowed by CORS' });
-  }
+//   const origin = req.headers.origin;
+//   if (allowedOrigins.includes(origin)) {
+//     res.setHeader('Access-Control-Allow-Origin', origin);
+//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+//     next();
+//   } else {
+//     res.status(403).json({ error: 'Not allowed by CORS' });
+//   }
+// });
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
 });
 
 // Rota para verificar se um usuário está online
