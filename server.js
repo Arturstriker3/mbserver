@@ -85,7 +85,8 @@ app.use((req, res, next) => {
   const allowedOrigins = [
     'https://messenger-buddy.vercel.app',
     'https://messenger-buddy-arturstriker3.vercel.app',
-    'https://messenger-buddy-git-master-arturstriker3.vercel.app'
+    'https://messenger-buddy-git-master-arturstriker3.vercel.app',
+    'http://localhost:5173/'
   ];
 
   const origin = req.headers.origin;
